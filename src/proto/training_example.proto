@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package visual_controller;
+
+message Command {
+  enum CommandType {
+    UNKNOWN = 0;
+    UP = 1;
+    DOWN = 2;
+    LEFT = 3;
+    RIGHT = 4;
+    CONFIRM = 5;
+    REJECT = 6;
+  }
+  CommandType type = 1;
+}
+
+message Frame {
+  // Micro seconds since epoch.
+  int64 timestamp = 1;
+  // JPG string.
+  bytes image = 2; 
+}
+
+message TrainingExample {
+  repeated Frame frames = 1;
+  Command command = 2;
+}
+
+message TrainingExamples {
+  repeated TrainingExample examples = 1;
+}
